@@ -10,7 +10,7 @@
             state: absent
       rescue:
         - name: Rename local admin
-          msg: "Administrator account found, renaming to Chancellor"
+          - debug: msg "Administrator account found, renaming to Chancellor"
           win_shell: Rename-LocalUser -name "administrator" -newname "chancellor"
           
     - name: Check for Chancellor
