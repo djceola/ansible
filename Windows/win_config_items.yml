@@ -18,7 +18,7 @@
   - name: Disable IE ESC  
     win_shell: c:\scripts\disable_ieesc.ps1
   - name: Disable IPv6
-    win_shell: "New-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\' -Name  'DisabledComponents' -Value '0xffffffff' -PropertyType 'DWord'"
+    win_shell: "New-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\ -Name DisabledComponents -Value 0xffffffff -PropertyType DWord"
   - name: Check Windows Updates Key
     win_reg_stat:
       path: HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate
