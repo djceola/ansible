@@ -1,0 +1,25 @@
+---
+- name: Windows Default Config Items
+  hosts: all
+  tasks:
+  - name: Set Time Zone
+    win_timezone: 
+      timezone: "Eastern Standard Time"
+  - name: Remote Desktop
+    win_shell: Set-ItemProperty -Path ‘HKLM:SYSTEM\CurrentControlSetControl\Terminal Server’ -Name fDenyTSConnections -Value 0
+  - name: Remote Desktop Authentication
+    win_shell: set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 0
+  - name: Disable UAC
+    win_shell: Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 00000000
+  - name: Disable IE ESC
+    win_copy:
+      src: "\\carilion.com\SYSVOL\carilion.com\scripts\Ansible\disable_ieesc.ps1"
+      dest: "c:\scripts\disable_ieesc.ps1"
+    win_shell: "c:\scripts\disable_ieesc.ps1"
+  - name: Disable IPv6
+    win_shell: New-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\' -Name  'DisabledComponents' -Value '0xffffffff' -PropertyType 'DWord'
+  - name: Check Windows Updates Key
+    win_reg_stat:
+      path: HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate
+      name: TargetGroup
+...
