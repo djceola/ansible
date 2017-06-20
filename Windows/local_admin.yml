@@ -1,6 +1,6 @@
 ---
 - name: Local Admin
-  hosts: dpa-prd-app01
+  hosts: all
   gather_facts: false
   tasks:
   - block:
