@@ -4,14 +4,14 @@
   gather_facts: false
   tasks:
   - block:
-    - name: Check Local Admin doesn't exist
+    - name: Check for Local Administrator, rename if found
       win_user:
         name: administrator
         state: absent
     rescue:
     - name: Rename local admin
       win_shell: Rename-LocalUser -name "administrator" -newname "chancellor"
-  - name: Check for Chancellor
+  - name: Check for & Configure Chancellor
     win_user:
       name: chancellor
       state: present
