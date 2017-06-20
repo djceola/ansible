@@ -11,7 +11,6 @@
     rescue:
     - name: Rename local admin
       win_shell: Rename-LocalUser -name "administrator" -newname "chancellor"
-      debug: msg "Administrator account found, renaming to Chancellor"
   - name: Check for Chancellor
     win_user:
       name: chancellor
