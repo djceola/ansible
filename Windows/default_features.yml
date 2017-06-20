@@ -1,0 +1,27 @@
+---
+- name: Ensure Carilion Default Features are present
+  hosts: all
+  tasks:
+    - name: Desktop Experience
+      win_feature:
+        name: Desktop-Experience
+        state: Present
+        include_sub_features: True
+      when: ('2008' in ansible_os_name) or ('2012' in ansible_os_name)
+    - name: .Net 3.5
+      win_feature:
+        name: NET-Framework-Core
+        state: Present
+        include_sub_features: True
+    - name: .Net 4.6
+      win_feature:
+        name: NET-Framework-45-Core
+        state: Present
+        include_sub_features: True
+        when: ('2016' in ansible_os_name)
+    - name: SNMP
+      win_feature:
+        name: SNMP-Service
+        state: Present
+        include_sub_features: True
+...
