@@ -3,22 +3,21 @@
   hosts: dpa-prd-app01
   gather_facts: false
   tasks:
-    - block:
-        - name: Check Local Admin doesn't exist
-          win_user:
-            name: administrator
-            state: absent
-      rescue:
-        - name: Rename local admin
-          - debug: msg "Administrator account found, renaming to Chancellor"
-          win_shell: Rename-LocalUser -name "administrator" -newname "chancellor"
-          
-    - name: Check for Chancellor
+  - block:
+    - name: Check Local Admin doesn't exist
       win_user:
-        name: chancellor
-        state: present
-        password: "C@ri!i0n"
-        update_password: on_create
-        groups: Administrators
-        groups_action: replace
+        name: administrator
+        state: absent
+    rescue:
+    - name: Rename local admin
+      win_shell: Rename-LocalUser -name "administrator" -newname "chancellor"
+      - debug: msg "Administrator account found, renaming to Chancellor"
+  - name: Check for Chancellor
+    win_user:
+      name: chancellor
+      state: present
+      password: "C@ri!i0n"
+      update_password: on_create
+      groups: Administrators
+      groups_action: replace
 ...
