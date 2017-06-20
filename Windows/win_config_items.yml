@@ -13,7 +13,7 @@
     win_shell: Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 00000000
   - name: Copy IE ESC Script
     win_copy:
-      src: \\carilion.com\SYSVOL\carilion.com\scripts\Ansible\disable_ieesc.ps1
+      src: "\\carilion.com\SYSVOL\carilion.com\scripts\Ansible\disable_ieesc.ps1"
       dest: c:\scripts\disable_ieesc.ps1
   - name: Disable IE ESC  
     win_shell: c:\scripts\disable_ieesc.ps1
