@@ -1,0 +1,22 @@
+---
+- name: Local Admin
+  hosts: all
+  gather_facts: false
+  tasks:
+  - block:
+    - name: Check for Local Administrator, rename if found
+      win_user:
+        name: administrator
+        state: absent
+    rescue:
+    - name: Rename local admin
+      win_shell: Rename-LocalUser -name "administrator" -newname "chancellor"
+  - name: Check for & Configure Chancellor
+    win_user:
+      name: chancellor
+      state: present
+      password: ""
+      update_password: on_create
+      groups: Administrators
+      groups_action: replace
+...
