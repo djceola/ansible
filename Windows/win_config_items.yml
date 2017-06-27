@@ -11,10 +11,6 @@
     win_shell: set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 0
   - name: Disable UAC
     win_shell: Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 00000000
-  - name: Copy IE ESC Script
-    win_shell: cp \\carilion.com\SYSVOL\carilion.com\scripts\Ansible\disable_ieesc.ps1 c:\scripts\disable_ieesc.ps1
-  - name: Disable IE ESC  
-    win_shell: c:\scripts\disable_ieesc.ps1
   - name: Disable IPv6
     win_shell: New-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\ -Name DisabledComponents -Value 0xffffffff -PropertyType DWord
   - name: Check Windows Updates Key
