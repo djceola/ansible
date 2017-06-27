@@ -9,8 +9,13 @@
         name: administrator
         state: absent
     rescue:
-    - name: Rename local admin
+    - name: Rename local admin 2012/2008
+      win_shell: wmic useraccount where "name='Administrator'" rename Chancellor
+      when: ('2008' in ansible_os_name) or ('2012' in ansible_os_name)
+    - name: Rename local admin 2016
       win_shell: Rename-LocalUser -name administrator -newname chancellor
+      when: ('2016' in ansible_os_name)
+
   - name: Check for & Configure Chancellor
     win_user:
       name: chancellor
