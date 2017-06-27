@@ -10,7 +10,7 @@
         state: absent
     rescue:
     - name: Rename local admin
-      win_shell: Rename-LocalUser -name "administrator" -newname "chancellor"
+      win_shell: Rename-LocalUser -name administrator -newname chancellor
   - name: Check for & Configure Chancellor
     win_user:
       name: chancellor
