@@ -1,7 +1,6 @@
 ---
 - name: Local Admin
   hosts: all
-  gather_facts: false
   tasks:
   - block:
     - name: Check for Local Administrator, rename if found
